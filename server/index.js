@@ -20,9 +20,12 @@ const wsServer = new WebSocket.Server({ port: port });
 wsServer.on('listening', () => console.log(`# listening on :${port}`));
 
 wsServer.on('connection', (ws, req) => {
-  console.log(`* connection from ${req.socket.remoteAddress}`);
+  console.log(`* connection ${req.socket.remoteAddress}`);
   ws.on('message', message => {
     if (ws.readyState === WebSocket.OPEN) ws.send(message);
-    console.debug(`- ${ws._socket.remoteAddress} : '${message}'`);
+    console.debug(`- ${req.socket.remoteAddress} : '${message}'`);
   });
+  ws.on('close', (code, reason) => {
+    console.log(`* connection ${req.socket.remoteAddress} closed w/ code ${code}, reason: ${reason || 'none'}`);
+  })
 });
