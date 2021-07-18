@@ -7,5 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ch4",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "node-static": "^0.7.11"
+  }
 }

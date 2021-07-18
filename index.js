@@ -1,16 +1,17 @@
 const http = require("http");
+const statik = require("node-static");
 
-const hostname = "0.0.0.0";
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end(`Hello, World!\nPath: ${req.url}`);
+const staticFiles = new statik.Server("./static/");
 
-  console.log(`${req.method} ${req.url} HTTP/${req.httpVersion} - ${res.statusCode} ${res.statusMessage}`);
+const server = http.createServer((req, res) => {
+  req.addListener("end", () => {
+    staticFiles.serve(req, res);
+    console.log(`${req.method} ${req.url} HTTP/${req.httpVersion} - ${res.statusCode}`);
+  }).resume();
 });
 
-server.listen(port, hostname, () => {
-  console.log(`running @ ${hostname}:${port}\n* http://127.0.0.1:${port}`);
+server.listen(port, "0.0.0.0", () => {
+  console.log(`running @ 0.0.0.0:${port}\n* http://127.0.0.1:${port}`);
 });
