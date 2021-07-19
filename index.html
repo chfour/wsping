@@ -10,8 +10,11 @@
     <h1>wsping</h1>
     
     <input type="text" id="host" value="ws://localhost:8081/" placeholder="address">
-    <input type="button" value="connect">
-    <p id="status">status: not loaded</p>
-    <canvas width="320" height="155" id="drawwindow" style="display: block; background-color: black;"></canvas>
+    <input type="button" id="connect" value="connect">
+    <span id="status">status: not loaded</span>
+
+    <canvas width="320" height="155" id="drawwindow" style="display: block; background-color: blue;"></canvas>
+
+    <script src="client.js"></script>
 </body>
 </html>
